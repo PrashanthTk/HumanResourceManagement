@@ -1,0 +1,41 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Organization Records</title>  
+     {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+</head>  
+<body>  
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr>  
+        <th>FormMaster ID</th>  
+        <th>FormMaster Name</th>  
+        <!--<th>Employee Email</th>  
+        <th>Employee Contact</th>  -->
+        <th>Actions</th>  
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for formmaster in formmasters %}  
+    <tr>  
+        <td>{{ formmaster.id }}</td>  
+        <td>{{ formmaster.title }}</td>  
+        <td>  
+            <a href="/api/formmaster/edit/{{ formmaster.id }}/"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
+            <a href="/api/formmaster/delete/{{ formmaster.id }}/">Delete</a>  
+        </td>  
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+<br>  
+<br>  
+<center><a href="/api/formmaster/" class="btn btn-primary">Add New FormMaster</a></center>  
+<center><a href="/api/formdropdowns/" class="btn btn-primary">Add New FormDropdown</a></center>  
+<center><a href="/api/formfield/" class="btn btn-primary">Add New FormField</a></center>  
+<center><a href="/api/formfield/" class="btn btn-primary">Add New Organization</a></center>  
+<center><a href="/api/formfield/" class="btn btn-primary">Add New Branch</a></center>  
+</body>  
+</html>  

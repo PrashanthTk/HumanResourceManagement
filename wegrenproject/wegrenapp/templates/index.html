@@ -1,0 +1,122 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+    
+</head>  
+<body>  
+<form method="POST" id="masterform" class="post-form" data-branches-url="{% url 'ajax_load_branches' %}" action="/api/formmaster">  
+        {% csrf_token %}  
+    <div class="container">  
+<br>  
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <h3>Enter Details</h3>  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">HrmDynamicFormMaster Id:</label>  
+    <div class="col-sm-4">  
+      {{ form.id }}  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">HrmDynamicFormMaster Title:</label>  
+    <div class="col-sm-4">  
+      {{ form.title }}  
+    </div>  
+  </div>  
+    
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Description:</label>  
+    <div class="col-sm-4">  
+        {{ form.description }}
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster FormURL:</label>  
+    <div class="col-sm-4">  
+        {{ form.form_url }}"
+    </div>  
+  </div> 
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Created At:</label>  
+    <div class="col-sm-4">  
+        <!--{{ form.created_at }}-->
+        <input type="datetime-local" name="created_at" required id="id_created_at">
+
+    </div>  
+  </div> <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Updated At:</label>  
+    <div class="col-sm-4">  
+        <!--{{ form.updated_at }}"-->
+        <input type="datetime-local" name="updated_at" required id="id_updated_at">
+    </div>  
+  </div> 
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Organization:</label>  
+    <div class="col-sm-4">  
+        <select name="organizations" id="organizations">
+          <option value="">------</option>
+{% for org in organizations %}
+    <option value="{{ org.id }}">{{ org.orgname }}</option>
+{% endfor %}
+</select>
+        <!--<input type="text" name="formurl" id="id_formurl" required maxlength="100" value="{{ formmaster.branchid }}" />  -->
+    </div>  
+  </div> 
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Branch :</label>  
+    <div class="col-sm-4">  
+        <select name ="branches" id="branches">
+        </select>
+    </div>  
+  </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <button type="submit" class="btn btn-primary">Submit</button>  
+    </div>  
+  </div>  
+   
+</form>  
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!--<script type="text/javascript" src="http://yourjavascript.com/7174319415/script.js"></script>-->
+        <script>
+            $(document).ready(function(){
+                 $('select#organizations').change(function () {
+                     var optionSelected = $(this).find("option:selected");
+                     var valueSelected  = optionSelected.val();
+                     var org_name   = optionSelected.text();
+                     var url =$("#masterform").attr('data-branches-url')
+                     console.log("Organization selected is")
+                     console.log(org_name)
+                     data = {'orgname' : org_name ,'organization':valueSelected};
+                     $.ajax({
+                      url:url,
+                      data:data,
+                      success:function(data)
+                      {
+                       //$("#branch").html(data)
+                       console.log("Branches are")
+                       console.log(data);
+                            //$("#branches option").remove();
+                            //for (var i = data.length - 1; i >= 0; i--) {
+                            //    $("#branches").append('<option val="'+data[i].id+'">'+ data[i].branchname +'</option>');
+                            //};
+                             $("#branches").html(data);
+                        
+                      }
+                     });
+                     
+                 });
+            });
+        </script>
+</body>  
+</html>  

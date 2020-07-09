@@ -1,0 +1,81 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+    {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+</head>  
+<body>  
+<form method="POST" class="post-form" action="/api/formmaster/update/{{formmaster.id}}/">  
+        {% csrf_token %}  
+    <div class="container">  
+<br>  
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <h3>Update Details</h3>  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormmaster Id:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="id" id="id_formmasterid" required maxlength="20" value="{{ formmaster.id }}"/>  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Title:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="title" id="id_title" required maxlength="255" value="{{ formmaster.title }}" />  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Description:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="description" id="id_description" required maxlength="1000" value="{{ formmaster.description }}" />  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster FormURL:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="formurl" id="id_formurl" required maxlength="100" value="{{ formmaster.formurl }}" />  
+    </div>  
+  </div> 
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Created At:</label>  
+    <div class="col-sm-4">  
+        <input type="datetime-local" name="formurl" id="id_formurl" required value="{{ formmaster.createdat }}" />  
+    </div>  
+  </div> <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Updated At:</label>  
+    <div class="col-sm-4">  
+        <input type="datetime-local" name="formurl" id="id_formurl" required value="{{ formmaster.updatedat }}" />  
+    </div>  
+  </div> <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Organization ID:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="formurl" id="id_formurl" required maxlength="100" value="{{ formmaster.orgid }}" />  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">DynamicFormMaster Branch:</label>  
+    <div class="col-sm-4">  
+        <select name="item_branchid">
+{% for branch in branches %}
+    <option value="{{ branch.id }}">{{ branch.branchname }}</option>
+{% endfor %}
+</select>
+        <!--<input type="text" name="formurl" id="id_formurl" required maxlength="100" value="{{ formmaster.branchid }}" />  -->
+    </div>  
+  </div> 
+
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <button type="submit" class="btn btn-success">Update</button>  
+    </div>  
+  </div>  
+    </div>  
+</form>  
+</body>  
+</html>

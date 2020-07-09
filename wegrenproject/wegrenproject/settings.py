@@ -81,7 +81,6 @@ WSGI_APPLICATION = 'wegrenproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        #'NAME': os.path.join(BASE_DIR, 'db.mysql'),
         'NAME': 'wegrenhrm2',
         'USER': 'root',
         'PASSWORD':'root',
